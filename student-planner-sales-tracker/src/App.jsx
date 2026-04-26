@@ -1,39 +1,65 @@
-import { useState } from 'react'
-import Dashboard from './components/Dashboard';
-import SalesTracker from './components/SalesTracker';
-import StudentPlanner from './components/StudentPlanner';
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
-function App() {
+import Dashboard from "./components/Dashboard";
+import Sales from "./components/Sales";
+import Debts from "./components/Debts";
+import Stock from "./components/Stock";
+import Planner from "./components/Planner";
+
+function App(){
   const [activePage, setActivePage] = useState("dashboard");
 
+  // page render function
   const renderPage = () => {
     switch(activePage) {
       case "sales":
-        return <SalesTracker/>;
-        case "planner":
-          return <StudentPlanner/>;
-          default:
-            return <Dashboard/>;
-
+        return <Sales/>;
+        case "debts":
+          return <Debts/>;
+          case "planner":
+            return <Planner/>;
+            default:
+              return <Dashboard/>;
     }
   };
 
-  return (
-    <>
-   <div className='app'>
-    <aside className='sidebar'>
-      <h2>My App</h2>
-      <button onClick={()=>setActivePage("dashboard")}>Dashboard</button>
-      <button onClick={()=>setActivePage("sales")}>SalesTracker</button>
-      <button onClick={()=>setActivePage("planner")}>StudentPlanner</button>
-    </aside>
+  return(
+    <div className="app">
+      {/* sidebar */}
+      <div className="sidebar">
+        <h2>💼Student Hustle Manager</h2>
 
-    <main className='main-content'>{renderPage()}</main>
+        <button onClick={()=>setActivePage("dashboard")}>
+          Dashboard
+        </button>
 
-   </div>
-    </>
+        <button onClick={()=>setActivePage("sales")}>
+          Sales
+        </button>
+
+        <button onClick={()=>setActivePage("debts")}>
+          Debts
+        </button>
+
+        <button onClick={()=>setActivePage("stock")}>
+          Stock
+        </button>
+
+        <button onClick={()=>setActivePage("planner")}>
+          Planner
+        </button>
+
+
+      </div>
+
+      {/* main content */}
+      <div className="main-content">
+        {renderPage()}
+      </div>
+    </div>
   );
 }
 
-export default App
+
+export default App;
