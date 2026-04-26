@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 
 function SalesTracker(){
   const[sales, setSales] = useState([]);
@@ -8,16 +8,30 @@ function SalesTracker(){
   const[cost, setCost] = useState("");
   const[quantity, setQuantity] = useState("");
 
-  // load sales
+  // daily sales state
+  const [dailySales, setDailySales] = useState([]);
+  const [dailyAmount, setDailyAmount] = useState("");
+  const [note, setNote] = useState("")
+
+  // load data
   useEffect(()=> {
-    const saved = JSON.parse(localStorage.getItem("sales"));
-    if (saved) setSales(saved);
+    const savedSales = JSON.parse(localStorage.getItem("sales"));
+    if (savedSales) setSales(savedSales);
+
+    const savedDaily = JSON.parse(localStorage.getItem("dailySales"));
+    if(savedDaily) setDailySales(savedDaily);
   },[]);
 
-  // Save sales
+  // Save data
   useEffect(()=>{
     localStorage.setItem("sales",JSON.stringify(sales));
   },[sales]);
+
+  useEffect(()=>{
+    localStorage.setItem("dailySales",JSON.stringify(dailySales));
+  },[dailySales]);
+
+  // addd product sale
 
   const addSale = () => {
     if(!product || !price || !cost || !quantity)return;
@@ -39,9 +53,29 @@ function SalesTracker(){
     setQuantity("");
   };
 
+  // add daily sale
+  const addDailySale =()=>{
+    if(!dailyAmount)return;
+
+    const newEntry ={
+      amount: Number(dailyAmount),
+      note: note,
+      date: new Date().toLocaleDateString(),
+
+    };
+
+    setDailySales([...dailySales, newEntry]);
+
+    setDailyAmount("");
+    setNote("");
+  };
+
   return(
-    <div style={{maxWidth: "600px",margin:"auto"}}>
+    <div style={{maxWidth: "700px",margin:"auto"}}>
       <h1>Sales Tracker</h1>
+
+      {/* product sales section */}
+      <h2>Add Product Sale</h2>
 
       {/* form */}
       <div style={{display:"flex", flexDirection: "column", gap:"10px"}}>
@@ -82,6 +116,38 @@ function SalesTracker(){
             {sale.product} - {sale.quantity} pcs - {sale.price} UGX 
            
           </li>
+        ))}
+      </ul>
+
+      <hr />
+
+      {/* daily sales section */}
+      <h2>Daily Sales Log</h2>
+
+      <div style={{display:"flex", flexDirection: "column", gap: "10px"}}>
+        <input
+        placeholder="Amount made today"
+        type="number"
+        value={dailyAmount}
+        onChange={(e)=> setDailyAmount(e.target.value)}
+        />
+
+        <input 
+        placeholder="Note (optional)"
+        value={note}
+        onChange={(e)=> setNote(e.target.value)}
+        />
+
+        <button onClick={addDailySale}>Add Daily Sale</button>
+      </div>
+
+      {/* daily sales list */}
+      <ul style={{marginTop:"20px"}}>
+        {dailySales.map((entry, index)=>(
+          <li key={index}>
+            {entry.date} - {entry.amount} UGX ({entry.note})
+          </li>
+
         ))}
       </ul>
     </div>
