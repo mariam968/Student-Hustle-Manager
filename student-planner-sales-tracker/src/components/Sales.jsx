@@ -95,14 +95,14 @@ return(
           <div key={date} style={{marginBottom:"20px"}}>
             <h3>{date}</h3>
 
-            {groupedSales=[date].map((sale, index)=>{
+            {groupedSales[date].map((sale, index)=>(
               <div key={index} className="card">
                 <span>
-                  {sale.item} ({sale.quantity} x {sale.price}) 
+                  {sale.item} ({sale.quantity} * {sale.price}) 
                 </span>
                 <strong>{sale.total} UGX</strong>
               </div>
-            })}
+      ))}
 
             <p>
               <strong>Total: {total} UGX</strong>

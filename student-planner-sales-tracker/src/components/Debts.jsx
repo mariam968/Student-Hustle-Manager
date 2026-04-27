@@ -91,7 +91,7 @@ function Debts(){
 
         <div className="card">
           <h3>Unpaid</h3>
-          <P>{unpaidDebt} UGX</P>
+          <p>{unpaidDebt} UGX</p>
         </div>
 
         <div className="card">
@@ -107,7 +107,7 @@ function Debts(){
         {debts.map((debt, index)=>(
           <div key={index} className="card">
             <div>
-              <strong>{debt.name}</strong> - {dabt.amount} UGX
+              <strong>{debt.name}</strong> - {debt.amount} UGX
               <br />
               <small>{debt.date}</small>
             </div>
