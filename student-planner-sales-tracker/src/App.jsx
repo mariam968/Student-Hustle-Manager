@@ -10,15 +10,18 @@ import Planner from "./components/Planner";
 function App() {
   const [activePage, setActivePage] = useState("dashboard");
 
-  // PAGE RENDER FUNCTION
+  //shared stock
+  const [stock, setStock] = useState([]);
+
+  // Page render function
   const renderPage = () => {
     switch (activePage) {
       case "sales":
-        return <Sales />;
+        return <Sales stock={stock} setStock={setStock} />;
       case "debts":
         return <Debts />;
       case "stock":
-        return <Stock />;   // ✅ FIXED
+        return <Stock stock={stock} setStock={setStock} />;
       case "planner":
         return <Planner />;
       default:
@@ -29,7 +32,7 @@ function App() {
   return (
     <div className="app">
       
-      {/* SIDEBAR */}
+      {/* sidebar*/}
       <div className="sidebar">
         <h2>💼 Student Hustle Manager</h2>
 
@@ -54,7 +57,7 @@ function App() {
         </button>
       </div>
 
-      {/* MAIN CONTENT */}
+      {/* main content*/}
       <div className="main-content">
         {renderPage()}
       </div>
