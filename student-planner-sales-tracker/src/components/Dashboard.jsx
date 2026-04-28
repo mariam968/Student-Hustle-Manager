@@ -1,70 +1,105 @@
 import { useState, useEffect } from "react";
 
-function Dashboard(){
+function Dashboard() {
   const [sales, setSales] = useState([]);
+  const [debts, setDebts] = useState([]);
+  const [stock, setStock] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-  useEffect(()=>{
-    const saved = JSON.parse(localStorage.getItem("sales"));
-    if (saved) setSales(saved);
-  },[]);
+  useEffect(() => {
+    setSales(JSON.parse(localStorage.getItem("sales")) || []);
+    setDebts(JSON.parse(localStorage.getItem("debts")) || []);
+    setStock(JSON.parse(localStorage.getItem("stock")) || []);
+    setTasks(JSON.parse(localStorage.getItem("tasks")) || []);
+  }, []);
 
-  // total sales
-  const totalSales = sales.reduce((sum, sale)=>sum + sale.total, 0);
+  // SALES CALCULATIONS
+  const totalSales = sales.reduce((sum, s) => sum + s.total, 0);
 
-  // today's date
   const today = new Date().toLocaleDateString();
 
   const todaySales = sales
-  .filter((sale)=>sale.date === today)
-  .reduce((sum, sale)=>sum + sale.total, 0);
+    .filter((s) => new Date(s.date).toLocaleDateString() === today)
+    .reduce((sum, s) => sum + s.total, 0);
 
-  // weekly sales
   const weekSales = sales
-  .filter((sale)=>{
-    const saleDate = new Date(sale.date);
-    const now = new Date();
-    const diff = (now - saleDate) / (1000*60*60*24);
-    return diff <= 7;
-  })
-  .reduce((sum, sale)=>sum + sale.total, 0);
+    .filter((s) => {
+      const diff = (new Date() - new Date(s.date)) / (1000 * 60 * 60 * 24);
+      return diff <= 7;
+    })
+    .reduce((sum, s) => sum + s.total, 0);
 
-
-  // monthly sales
   const monthSales = sales
-  .filter((sale)=>{
-    const saleDate = new Date(sale.date);
-    const now = new Date();
-    const diff = (now - saleDate) / (1000*60*60*24);
-    return diff <= 30;
-  })
-  .reduce((sum,sale)=>sum + sale.total, 0);
+    .filter((s) => {
+      const diff = (new Date() - new Date(s.date)) / (1000 * 60 * 60 * 24);
+      return diff <= 30;
+    })
+    .reduce((sum, s) => sum + s.total, 0);
 
-  return(
+  // DEBTS
+  const unpaidDebt = debts
+    .filter((d) => d.status === "not paid")
+    .reduce((sum, d) => sum + d.amount, 0);
+
+  // STOCK
+  const totalStock = stock.reduce((sum, s) => sum + s.quantity, 0);
+
+  // TASKS
+  const completedTasks = tasks.filter((t) => t.completed).length;
+
+  return (
     <div>
-      <h1>🚀Student Hustle Manager</h1>
+      <h1>🚀 Student Hustle Manager</h1>
       <p>Welcome back, CEO 👑</p>
-      
-      <div style={{display:"flex", gap:"20px", marginTop:"20px", flexWrap:"wrap"}}>
 
-        {/* today */}
-        <div className="card">
+      {/* SALES CARDS */}
+      <div className="dashboard-grid">
+        <div className="dashboard-card">
           <h3>Total Sales</h3>
           <p>{totalSales} UGX</p>
         </div>
 
-        {/* Week */}
-        <div className="card">
-          <h3>This Week</h3>
-          <p>{weekSales}</p>
+        <div className="dashboard-card">
+          <h3>Today</h3>
+          <p>{todaySales} UGX</p>
         </div>
 
-        {/* month */}
-        <div className="card">
+        <div className="dashboard-card">
+          <h3>This Week</h3>
+          <p>{weekSales} UGX</p>
+        </div>
+
+        <div className="dashboard-card">
           <h3>This Month</h3>
           <p>{monthSales} UGX</p>
         </div>
+      </div>
 
+      {/* OTHER STATS */}
+      <div className="dashboard-grid">
+        <div className="dashboard-card">
+          <h3>💳 Unpaid Debts</h3>
+          <p>{unpaidDebt} UGX</p>
+        </div>
 
+        <div className="dashboard-card">
+          <h3>📦 Stock Items</h3>
+          <p>{totalStock}</p>
+        </div>
+
+        <div className="dashboard-card">
+          <h3>📚 Tasks Done</h3>
+          <p>{completedTasks}</p>
+        </div>
+      </div>
+
+      {/* MOTIVATION */}
+      <div style={{ marginTop: "30px" }} className="dashboard-card">
+        <h3>🔥 Daily Motivation</h3>
+        <p>
+          Small daily actions create big results. Stay consistent, track everything,
+          and build your empire step by step.
+        </p>
       </div>
     </div>
   );
