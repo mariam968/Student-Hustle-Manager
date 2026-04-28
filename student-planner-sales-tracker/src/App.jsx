@@ -7,59 +7,60 @@ import Debts from "./components/Debts";
 import Stock from "./components/Stock";
 import Planner from "./components/Planner";
 
-function App(){
+function App() {
   const [activePage, setActivePage] = useState("dashboard");
 
-  // page render function
+  // PAGE RENDER FUNCTION
   const renderPage = () => {
-    switch(activePage) {
+    switch (activePage) {
       case "sales":
-        return <Sales/>;
-        case "debts":
-          return <Debts/>;
-          case "planner":
-            return <Planner/>;
-            default:
-              return <Dashboard/>;
+        return <Sales />;
+      case "debts":
+        return <Debts />;
+      case "stock":
+        return <Stock />;   // ✅ FIXED
+      case "planner":
+        return <Planner />;
+      default:
+        return <Dashboard />;
     }
   };
 
-  return(
+  return (
     <div className="app">
-      {/* sidebar */}
+      
+      {/* SIDEBAR */}
       <div className="sidebar">
-        <h2>💼Student Hustle Manager</h2>
+        <h2>💼 Student Hustle Manager</h2>
 
-        <button onClick={()=>setActivePage("dashboard")}>
+        <button onClick={() => setActivePage("dashboard")}>
           Dashboard
         </button>
 
-        <button onClick={()=>setActivePage("sales")}>
+        <button onClick={() => setActivePage("sales")}>
           Sales
         </button>
 
-        <button onClick={()=>setActivePage("debts")}>
+        <button onClick={() => setActivePage("debts")}>
           Debts
         </button>
 
-        <button onClick={()=>setActivePage("stock")}>
+        <button onClick={() => setActivePage("stock")}>
           Stock
         </button>
 
-        <button onClick={()=>setActivePage("planner")}>
+        <button onClick={() => setActivePage("planner")}>
           Planner
         </button>
-
-
       </div>
 
-      {/* main content */}
+      {/* MAIN CONTENT */}
       <div className="main-content">
         {renderPage()}
       </div>
+
     </div>
   );
 }
-
 
 export default App;
