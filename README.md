@@ -18,21 +18,6 @@ A simple and practical React app designed to help students manage their small bu
 * 📚 **Student Planner**
   Organize tasks by category (Work, School, Personal).
 
----
-
-## 🖼️ Screenshots
-
-### Dashboard
-
-[![Dashboard](./screenshots/dashboard.png)](./screenshots/dashboard.png)
-
-
-### Planner
-
-![Planner](/planner.png)
-
-
----
 
 ## 🛠️ Tech Stack
 
