@@ -24,7 +24,7 @@ A simple and practical React app designed to help students manage their small bu
 
 ### Dashboard
 
-![Dashboard](/dashboard.png)
+[![Dashboard](./screenshots/dashboard.png)](./screenshots/dashboard.png)
 
 
 ### Planner
