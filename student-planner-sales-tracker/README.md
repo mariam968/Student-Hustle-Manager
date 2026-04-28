@@ -1,16 +1,50 @@
-# React + Vite
+# 💼 Student Hustle Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and practical React app designed to help students manage their small businesses and daily productivity.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+* 💰 **Sales Tracking**
+  Record daily sales with item, quantity, price, and totals.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* 📦 **Stock Management**
+  Track items, quantities, and buying prices.
 
-## Expanding the ESLint configuration
+* 💳 **Debt Tracking**
+  Keep track of customers who owe you and their payment status.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* 📚 **Student Planner**
+  Organize tasks by category (Work, School, Personal).
+
+
+## 🛠️ Tech Stack
+
+* React
+* JavaScript
+* CSS
+
+---
+
+## 🎯 Purpose
+
+This project was built to help students:
+
+* Manage small business operations
+* Track income and inventory
+* Stay organized and productive
+
+---
+
+## 🌟 Future Improvements
+
+* 📊 Charts and analytics
+* 💰 Profit tracking system
+* ☁️ Cloud data storage
+
+---
+
+## 👨‍💻 Bisirikirwa Mariam(mariam968)
+
+Built with determination by a student developer 🚀
