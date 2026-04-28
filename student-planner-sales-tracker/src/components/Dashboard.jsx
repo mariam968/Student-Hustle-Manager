@@ -13,7 +13,7 @@ function Dashboard() {
     setTasks(JSON.parse(localStorage.getItem("tasks")) || []);
   }, []);
 
-  // SALES CALCULATIONS
+  // sales calculation
   const totalSales = sales.reduce((sum, s) => sum + s.total, 0);
 
   const today = new Date().toLocaleDateString();
@@ -36,12 +36,12 @@ function Dashboard() {
     })
     .reduce((sum, s) => sum + s.total, 0);
 
-  // DEBTS
+  // debts
   const unpaidDebt = debts
     .filter((d) => d.status === "not paid")
     .reduce((sum, d) => sum + d.amount, 0);
 
-  // STOCK
+  // stock
   const totalStock = stock.reduce((sum, s) => sum + s.quantity, 0);
 
   // TASKS
@@ -52,7 +52,7 @@ function Dashboard() {
       <h1>🚀 Student Hustle Manager</h1>
       <p>Welcome back, CEO 👑</p>
 
-      {/* SALES CARDS */}
+      {/*sales card */}
       <div className="dashboard-grid">
         <div className="dashboard-card">
           <h3>Total Sales</h3>
@@ -75,7 +75,7 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* OTHER STATS */}
+      {/* others */}
       <div className="dashboard-grid">
         <div className="dashboard-card">
           <h3>💳 Unpaid Debts</h3>
@@ -93,7 +93,7 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* MOTIVATION */}
+      {/*  motivation */}
       <div style={{ marginTop: "30px" }} className="dashboard-card">
         <h3>🔥 Daily Motivation</h3>
         <p>
